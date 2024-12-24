@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "263129868837",
+    "project_id": "choose-songs",
+    "storage_bucket": "choose-songs.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263129868837:android:21af547d9d8a56e682edcc",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDWlfvBjVQRcAThAhVZDwVxnZjqjVOZfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
