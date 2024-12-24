@@ -33,15 +33,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-
-    static const _screens = [
-    ListPage(),
+  //変数にページを追加
+  static const _screens = [
+    ListPage(),  
     SortPage()
   ];
   
   int _selectedIndex = 0;
 
-    void _onItemTapped(int index) {
+    void _onItemTapped(int index) {//index=タップされたアイテムの位置(今は0か1)
     setState(() {
       _selectedIndex = index;
     });
@@ -51,15 +51,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _screens[_selectedIndex],
+        body: _screens[_selectedIndex],//選択されたページを表示
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
+          currentIndex: _selectedIndex,//現在選択されているアイテムのindex
+          onTap: _onItemTapped,//アイテムがタップされた時の処理
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'お気に入り'),
+            BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted), label: 'リスト'),//ボタンに何を表示させるか
+            BottomNavigationBarItem(icon: Icon(Icons.filter_alt), label: '選択'),
           ],
-          type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.fixed,//
+          selectedIconTheme: const IconThemeData(size: 30, color: Color.fromARGB(255, 255, 166, 1)),//アイコンの色・大きさ
+          selectedItemColor: const Color.fromARGB(255, 179, 117, 1),//文字の色
         ));
   }
 }
