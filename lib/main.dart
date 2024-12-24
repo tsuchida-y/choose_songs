@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 255, 255)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'ホーム画面'),
@@ -56,12 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
           currentIndex: _selectedIndex,//現在選択されているアイテムのindex
           onTap: _onItemTapped,//アイテムがタップされた時の処理
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted), label: 'リスト'),//ボタンに何を表示させるか
-            BottomNavigationBarItem(icon: Icon(Icons.filter_alt), label: '選択'),
+            BottomNavigationBarItem(icon: Icon(Icons.library_music), label: 'ライブラリ'),//ボタンに何を表示させるか
+            BottomNavigationBarItem(icon: Icon(Icons.manage_search), label: 'セレクト'),
           ],
           type: BottomNavigationBarType.fixed,//
           selectedIconTheme: const IconThemeData(size: 30, color: Color.fromARGB(255, 255, 166, 1)),//アイコンの色・大きさ
           selectedItemColor: const Color.fromARGB(255, 179, 117, 1),//文字の色
+          backgroundColor: const Color.fromARGB(255, 255, 255, 240),//背景色
         ));
   }
 }
