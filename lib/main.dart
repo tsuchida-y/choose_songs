@@ -41,9 +41,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   //変数にページを追加
-  static const _screens = [
-    ListPage(),  
-    SortPage()
+  static final screens = [
+    const ListPageles(),  
+     const SortPage()
   ];
   
   int _selectedIndex = 0;
@@ -54,13 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _screens[_selectedIndex],//選択されたページを表示
+        body: screens[_selectedIndex],//選択されたページを表示
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,//現在選択されているアイテムのindex
           onTap: _onItemTapped,//アイテムがタップされた時の処理
