@@ -4,21 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:choose_songs/post.dart';
 
 
-
-
 class ListPageles extends StatelessWidget {
   const ListPageles({super.key});
-
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Firebase',
-      theme: ThemeData(
-      
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+       theme: ThemeData(
+         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+         useMaterial3: true,
+       ),
       home: const ListPageful(title: 'Firebase Learning!!'),
     );
   }
@@ -44,7 +40,6 @@ class ListPageState extends State<ListPageful> {
   //const ListPageState({Key? key}) : super(key: key);
 
   List <Post> posts = [];
-  static List<String> playList = ['PlayList1', 'PlayList2'];
 
 
   @override
@@ -56,20 +51,17 @@ class ListPageState extends State<ListPageful> {
 
     //firebaseからデータを取得する
     Future fetchFirebaseData() async{
-      print("fetchFirebaseData開始");
+    debugPrint("fetchFirebaseData開始");
     await FirebaseFirestore.instance.collection("playListID")
     //.orderBy('createdAt')
     .get().then((event) {//コールバック関数を渡す
-    print("fetchFirebaseDataインスタンスを生成");
+    debugPrint("fetchFirebaseDataインスタンスを生成");
       final docs = event.docs;//取得したドキュメントのリスト
       
         setState(() {//画面を更新する
           posts = docs.map((doc){//各要素に対して処理を行う。docは現在のドキュメント
-          print("dataの中身$posts");
-          print("現在のドキュメント$doc");
-          print("テスト");
             final data = doc.data();//現在のドキュメントのデータを取得
-            print("現在のドキュメントデータ$data");
+            debugPrint("現在のドキュメントデータ$data");
             final id = doc.id;
             final text = data['text'] as String;
             //final createdAt = data['createdAt'].toDate();//Timestamp型をDateTime型(日付や時間)に変換
@@ -84,18 +76,17 @@ class ListPageState extends State<ListPageful> {
             },
             
             ).toList();//Listに変換する
-            print("更新後のpostsリスト: $posts");
+            debugPrint("更新後のpostsリスト: $posts");
             
         });  
     });
-    print("fetchFirebaseData終了");
+    debugPrint("fetchFirebaseData終了");
   }
 
 
   @override
   Widget build(BuildContext context) {
-    print("build開始");
-    print("postsの中身$posts");
+    debugPrint("build開始");
     return Scaffold(
       appBar: AppBar(
         title: const Text('ライブラリ'),
@@ -125,9 +116,6 @@ class ListPageState extends State<ListPageful> {
 
               child: Row(
                 children: [
-                  // InkWell(//タップされた時の処理
-                  //   onTap: (){},
-                  // ),
 
                   const Icon(
                     Icons.music_note,
@@ -135,7 +123,6 @@ class ListPageState extends State<ListPageful> {
                   ),
 
                   Text(
-                    //posts.text,
                     post.text,
                     style:const TextStyle(
                       fontSize:20,
@@ -153,7 +140,15 @@ class ListPageState extends State<ListPageful> {
             )
           );
         })
-        )
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 255, 255, 240),
+          onPressed: () async {
+            await fetchFirebaseData();
+          },
+          child: const Icon(Icons.add),
+        ),
+
       );
   }
 }
