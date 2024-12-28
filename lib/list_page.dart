@@ -109,14 +109,14 @@ class ListPageState extends State<ListPageful> {
         backgroundColor: const Color.fromARGB(255, 255, 255, 240),
       ),
       body:Center(
-        child:ListView(
-          //itemCount: playList.length,
-          //itemBuilder: (BuildContext context, int index) {
-          children: posts.map((post) => InkWell(//タップ可能にしエフェクトをつける
-            onTap: ()async{
-              await fetchFirebaseData();
-            },
-          //Container(
+        child:ListView.builder(
+          itemCount: posts.length,
+          itemBuilder: (BuildContext context, int index) {
+            final post = posts[index];
+            return InkWell( //タップ可能にしエフェクトをつける
+              onTap: () async {
+                await fetchFirebaseData();
+              },
             child:Padding(
               padding:const EdgeInsets.symmetric(//上下左右に一定の余白を設定
                 horizontal:16,//左右の余白
@@ -125,11 +125,9 @@ class ListPageState extends State<ListPageful> {
 
               child: Row(
                 children: [
-                  InkWell(//タップされた時の処理
-                    onTap: (){
-
-                    },
-                  ),
+                  // InkWell(//タップされた時の処理
+                  //   onTap: (){},
+                  // ),
 
                   const Icon(
                     Icons.music_note,
@@ -153,9 +151,9 @@ class ListPageState extends State<ListPageful> {
                 ]
               )
             )
-          )).toList()
+          );
+        })
         )
-      )
-    );
+      );
   }
 }
