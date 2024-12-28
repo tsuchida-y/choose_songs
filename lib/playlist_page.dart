@@ -53,7 +53,7 @@ class ListPageState extends State<ListPageful> {
     //firebaseからデータを取得する
     Future fetchFirebaseData() async{
     debugPrint("fetchFirebaseData開始");
-    await FirebaseFirestore.instance.collection("playListID")
+    await FirebaseFirestore.instance.collection("playList")
     .orderBy('createdAt')
     .get().then((event) {//コールバック関数を渡す
     debugPrint("fetchFirebaseDataインスタンスを生成");
@@ -82,6 +82,11 @@ class ListPageState extends State<ListPageful> {
         });  
     });
     debugPrint("fetchFirebaseData終了");
+  }
+
+  //Firebaseからデータを削除するメソッド
+  Future deleteFirebaseData(String id) async{
+  await FirebaseFirestore.instance.collection("playList").doc(id).delete();//ドキュメントIDを指定して削除 。引数はいらない
   }
 
 
@@ -133,9 +138,41 @@ class ListPageState extends State<ListPageful> {
 
                   const Spacer(),
                   IconButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: ListView(
+                              children:[
+                                ListTile(
+                                  title:const Text('名前変更'),
+                                  onTap: () async {
+                                    await FirebaseFirestore.instance.collection("playListID").doc(post.id).delete();
+                                    await fetchFirebaseData();
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                ListTile(
+                                  title:const Text('削除'),
+                                  onTap: () async {
+                                    deleteFirebaseData(post.id);
+                                    fetchFirebaseData();
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ]
+                            )
+                          );
+                        },
+                      );
+
+
+                    },
                     icon:const Icon(Icons.more_vert),
                   ),
+
+
                 ]
               )
             )
