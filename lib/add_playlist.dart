@@ -9,10 +9,10 @@ class AddPlayList extends StatefulWidget {
 }
 
 class AddPlayListState extends State<AddPlayList> {
-
+  String newWord = '';
     //firebaseにデータを追加するメソッド
     Future addFirebaseData() async{
-    await FirebaseFirestore.instance.collection("posts").add({//インスタンスを取得しコレクションを指定
+    await FirebaseFirestore.instance.collection("playListID").add({//インスタンスを取得しコレクションを指定
       'name': 'Flutter',//追加するデータはmap型で指定
       'text': newWord,
       'createdAt': DateTime.now(),
@@ -25,8 +25,24 @@ class AddPlayListState extends State<AddPlayList> {
       appBar: AppBar(
         title: const Text('プレイリスト追加'),
       ),
-      body: const Center(
-          child: Text('プレイリスト追加', style: TextStyle(fontSize: 32.0))),
+
+      body:Column(
+        children: <Widget>[
+          TextField(
+            onChanged: (text) {
+              newWord = text;
+            },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              addFirebaseData();
+
+              Navigator.pop(context);
+            },
+            child: const Text('追加'),
+          ),
+        ],
+      ),
     );
   }
 }
