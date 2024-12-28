@@ -105,7 +105,7 @@ class ListPageState extends State<ListPageful> {
 
         backgroundColor: const Color.fromARGB(255, 255, 255, 240),
       ),
-      body:Center(
+      body:Container(
         child:ListView.builder(
           itemCount: posts.length,
           itemBuilder: (BuildContext context, int index) {
@@ -142,35 +142,37 @@ class ListPageState extends State<ListPageful> {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
-                          return Center(
-                            child: ListView(
+                          return Center(  
+                              child: ListView(
                               children:[
-                                ListTile(
-                                  title:const Text('名前変更'),
-                                  onTap: () async {
-                                    await FirebaseFirestore.instance.collection("playListID").doc(post.id).delete();
-                                    await fetchFirebaseData();
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                                ListTile(
-                                  title:const Text('削除'),
-                                  onTap: () async {
-                                    deleteFirebaseData(post.id);
-                                    fetchFirebaseData();
-                                    Navigator.pop(context);
-                                  },
-                                ),
+                                    ListTile(
+                                      leading: const Icon(Icons.edit),
+                                      title:const Text('名前変更'),
+                                      onTap: () async {
+                                        await FirebaseFirestore.instance.collection("playListID").doc(post.id).delete();
+                                        await fetchFirebaseData();
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: const Icon(Icons.delete), // 左側のアイコン
+                                      title:const Text('削除'),
+                                      onTap: () async {
+                                        deleteFirebaseData(post.id);
+                                        fetchFirebaseData();
+                                        Navigator.pop(context);
+                                      },
+                                    ),
                               ]
-                            )
+                            ) 
                           );
                         },
                       );
-
-
                     },
                     icon:const Icon(Icons.more_vert),
                   ),
+
+
 
 
                 ]
