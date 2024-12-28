@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:choose_songs/post.dart';
+import 'package:choose_songs/change_playlistname.dart';
 
 
 class ListPageles extends StatelessWidget {
@@ -105,7 +106,7 @@ class ListPageState extends State<ListPageful> {
 
         backgroundColor: const Color.fromARGB(255, 255, 255, 240),
       ),
-      body:Container(
+      body:Center(
         child:ListView.builder(
           itemCount: posts.length,
           itemBuilder: (BuildContext context, int index) {
@@ -142,6 +143,7 @@ class ListPageState extends State<ListPageful> {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
+                        
                           return Center(  
                               child: ListView(
                               children:[
@@ -149,9 +151,14 @@ class ListPageState extends State<ListPageful> {
                                       leading: const Icon(Icons.edit),
                                       title:const Text('名前変更'),
                                       onTap: () async {
-                                        await FirebaseFirestore.instance.collection("playListID").doc(post.id).delete();
-                                        await fetchFirebaseData();
+                                        //Navigator.pop(context);
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => ChangePlayListName(post),)
+                                        );
                                         Navigator.pop(context);
+                                        await fetchFirebaseData();
+                                        
                                       },
                                     ),
                                     ListTile(
