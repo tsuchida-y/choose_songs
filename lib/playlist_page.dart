@@ -1,3 +1,4 @@
+import 'package:choose_songs/add_playlist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class ListPageState extends State<ListPageful> {
     Future fetchFirebaseData() async{
     debugPrint("fetchFirebaseData開始");
     await FirebaseFirestore.instance.collection("playListID")
-    //.orderBy('createdAt')
+    .orderBy('createdAt')
     .get().then((event) {//コールバック関数を渡す
     debugPrint("fetchFirebaseDataインスタンスを生成");
       final docs = event.docs;//取得したドキュメントのリスト
@@ -64,13 +65,13 @@ class ListPageState extends State<ListPageful> {
             debugPrint("現在のドキュメントデータ$data");
             final id = doc.id;
             final text = data['text'] as String;
-            //final createdAt = data['createdAt'].toDate();//Timestamp型をDateTime型(日付や時間)に変換
+            final createdAt = data['createdAt'].toDate();//Timestamp型をDateTime型(日付や時間)に変換
             //final updatedAt = data['updatedAt']?.toDate();
 
             return Post(//取得したデータを使用し、Postオブジェクトを生成し返す
               id:id,//左がPostクラスのフィールド、右が取得したデータ
               text:text,
-              //createdAt:createdAt,
+              createdAt:createdAt,
               //updatedAt:updatedAt
             );
             },
@@ -141,11 +142,21 @@ class ListPageState extends State<ListPageful> {
           );
         })
         ),
+
+        //プレイリストを追加するボタン
         floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 240),
+          
           onPressed: () async {
+            debugPrint("画面遷移開始");
+            await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AddPlayList()),
+            );
+            debugPrint("画面遷移終了");
             await fetchFirebaseData();
+            debugPrint("fetchFirebaseData呼び出し");
           },
+          backgroundColor: const Color.fromARGB(255, 255, 255, 240),
           child: const Icon(Icons.add),
         ),
 
