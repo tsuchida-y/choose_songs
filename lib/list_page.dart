@@ -94,6 +94,8 @@ class ListPageState extends State<ListPageful> {
 
   @override
   Widget build(BuildContext context) {
+    print("build開始");
+    print("postsの中身$posts");
     return Scaffold(
       appBar: AppBar(
         title: const Text('ライブラリ'),
@@ -107,10 +109,14 @@ class ListPageState extends State<ListPageful> {
         backgroundColor: const Color.fromARGB(255, 255, 255, 240),
       ),
       body:Center(
-        child:ListView.builder(
-          itemCount: playList.length,
-          itemBuilder: (BuildContext context, int index) {
-          return Container(
+        child:ListView(
+          //itemCount: playList.length,
+          //itemBuilder: (BuildContext context, int index) {
+          children: posts.map((post) => InkWell(//タップ可能にしエフェクトをつける
+            onTap: ()async{
+              await fetchFirebaseData();
+            },
+          //Container(
             child:Padding(
               padding:const EdgeInsets.symmetric(//上下左右に一定の余白を設定
                 horizontal:16,//左右の余白
@@ -131,8 +137,8 @@ class ListPageState extends State<ListPageful> {
                   ),
 
                   Text(
-                    playList[index],
-                    //playList[index],
+                    //posts.text,
+                    post.text,
                     style:const TextStyle(
                       fontSize:20,
                       //fontWeight: FontWeight.bold,//テキストの太さ
@@ -147,8 +153,8 @@ class ListPageState extends State<ListPageful> {
                 ]
               )
             )
-          );
-        })
+          )).toList()
+        )
       )
     );
   }
