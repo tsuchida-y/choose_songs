@@ -32,6 +32,11 @@ class ChangePlayListNameState extends State<ChangePlayListName> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('UpdatePage'),
+        titleTextStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+        ),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 240),
       ),
       body: Column(
         children:[

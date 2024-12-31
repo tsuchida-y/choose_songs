@@ -24,6 +24,11 @@ class AddPlayListState extends State<AddPlayList> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('プレイリスト追加'),
+        titleTextStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+        ),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 240),
       ),
 
       body:Column(
