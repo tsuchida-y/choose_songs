@@ -1,9 +1,9 @@
-import 'package:choose_songs/add_playlist.dart';
+import 'package:choose_songs/PlayList/add_playlist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:choose_songs/post.dart';
-import 'package:choose_songs/change_playlistname.dart';
+import 'package:choose_songs/PlayList/change_playlistname.dart';
 
 
 class ListPageles extends StatelessWidget {
@@ -92,10 +92,8 @@ class ListPageState extends State<ListPageful> {
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 35,
-          fontWeight: FontWeight.bold,
-          
+          fontWeight: FontWeight.bold, 
         ),
-
         backgroundColor: const Color.fromARGB(255, 255, 255, 240),
       ),
       body:Center(

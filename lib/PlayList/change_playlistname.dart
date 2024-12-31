@@ -31,7 +31,7 @@ class ChangePlayListNameState extends State<ChangePlayListName> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('UpdatePage'),
+        title: const Text('名前変更'),
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 20,
