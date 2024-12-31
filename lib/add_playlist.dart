@@ -29,6 +29,7 @@ class AddPlayListState extends State<AddPlayList> {
       body:Column(
         children: <Widget>[
           TextField(
+            autofocus: true,
             onChanged: (text) {
               newWord = text;
             },
