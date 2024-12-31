@@ -35,7 +35,15 @@ class ChangePlayListNameState extends State<ChangePlayListName> {
       ),
       body: Column(
         children:[
+          const Padding(
+            padding: EdgeInsets.all(50),
+          ),
           TextFormField(
+              decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: '新しいプレイリスト名',
+            ),
+            autofocus: true,
             initialValue: widget.post.text,//Postクラスのtextフィールドを初期値として設定
             onChanged: (value){//文字が入力されるたびに呼ばれる
               updatedWord = value;

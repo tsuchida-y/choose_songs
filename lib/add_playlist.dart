@@ -27,8 +27,19 @@ class AddPlayListState extends State<AddPlayList> {
       ),
 
       body:Column(
+        
         children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.all(50),
+            ),
           TextField(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'プレイリスト名',
+              hintText: 'Playlist1',
+              hintStyle: TextStyle(color: Color.fromARGB(255, 130, 130, 130)),
+
+            ),
             autofocus: true,
             onChanged: (text) {
               newWord = text;
