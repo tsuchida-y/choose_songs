@@ -2,12 +2,12 @@ class Post{
   String id;
   String text;
   DateTime createdAt;
-  //DateTime? updatedAt;
+  DateTime? updatedAt;
 
   Post({
     required this.id,
     required this.text,
     required this.createdAt,
-    //required this.updatedAt,
+    required this.updatedAt,
   });
 }

@@ -1,4 +1,5 @@
 import 'package:choose_songs/PlayList/add_playlist.dart';
+import 'package:choose_songs/Song/song_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class ListPageles extends StatelessWidget {
          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
          useMaterial3: true,
        ),
-      home: const ListPageful(title: 'Firebase Learning!!'),
+      home: const ListPageful(title: 'ライブラリ'),
     );
   }
 }
@@ -62,13 +63,13 @@ class ListPageState extends State<ListPageful> {
             final id = doc.id;
             final text = data['text'] as String;
             final createdAt = data['createdAt'].toDate();//Timestamp型をDateTime型(日付や時間)に変換
-            //final updatedAt = data['updatedAt']?.toDate();
+            final updatedAt = data['updatedAt']?.toDate();
 
             return Post(//取得したデータを使用し、Postオブジェクトを生成し返す
               id:id,//左がPostクラスのフィールド、右が取得したデータ
               text:text,
               createdAt:createdAt,
-              //updatedAt:updatedAt
+              updatedAt:updatedAt
             );
             },
             
@@ -88,7 +89,7 @@ class ListPageState extends State<ListPageful> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ライブラリ'),
+        title: Text(widget.title),
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 35,
@@ -103,7 +104,10 @@ class ListPageState extends State<ListPageful> {
             final post = posts[index];
             return InkWell( //タップ可能にしエフェクトをつける
               onTap: () async {
-                await fetchFirebaseData();
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SongPageles())
+                );
               },
             child:Padding(
               padding:const EdgeInsets.symmetric(//上下左右に一定の余白を設定
