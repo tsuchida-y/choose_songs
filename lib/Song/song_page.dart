@@ -1,20 +1,5 @@
 import 'package:flutter/material.dart';
 
-class SongPageles extends StatelessWidget {
-  const SongPageles({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-       theme: ThemeData(
-         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-         useMaterial3: true,
-       ),
-      home: const SongPageful(title: '曲一覧'),
-    );
-  }
-}
-
 class SongPageful extends StatefulWidget {
   const SongPageful({super.key, required this.title});
 
