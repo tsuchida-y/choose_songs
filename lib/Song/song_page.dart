@@ -1,9 +1,11 @@
+import 'package:choose_songs/Song/add_song.dart';
 import 'package:flutter/material.dart';
 
 class SongPageful extends StatefulWidget {
-  const SongPageful({super.key, required this.title});
+  const SongPageful({super.key, required this.title,required this.id});
 
   final String title;
+  final String id;
 
   @override
   State<SongPageful> createState() => SongPageState();
@@ -14,10 +16,10 @@ class SongPageState extends State<SongPageful> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("曲一覧"),
+        title: const Text("曲一覧"),
         titleTextStyle: const TextStyle(
           color: Colors.black,
-          fontSize: 35,
+          fontSize: 30,
           fontWeight: FontWeight.bold, 
         ),
         backgroundColor: const Color.fromARGB(255, 255, 255, 240),
@@ -63,6 +65,10 @@ class SongPageState extends State<SongPageful> {
         floatingActionButton: FloatingActionButton(
           
           onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AddSong())
+            );
           },
           backgroundColor: const Color.fromARGB(255, 255, 255, 240),
           child: const Icon(Icons.add),

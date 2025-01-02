@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AddPlayList extends StatefulWidget {
-  const AddPlayList({Key? key}) : super(key: key);
+  const AddPlayList({super.key});
 
   @override
   State<AddPlayList> createState() => AddPlayListState();
@@ -10,6 +10,7 @@ class AddPlayList extends StatefulWidget {
 
 class AddPlayListState extends State<AddPlayList> {
   String newWord = '';
+  
     //firebaseにデータを追加するメソッド
     Future addFirebaseData() async{
     await FirebaseFirestore.instance.collection("playList").add({//インスタンスを取得しコレクションを指定

@@ -106,7 +106,7 @@ class ListPageState extends State<ListPageful> {
               onTap: () async {
                 await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SongPageful(title: '',))
+                  MaterialPageRoute(builder: (context) => SongPageful(title: '',id: post.id,))
                 );
               },
             child:Padding(
