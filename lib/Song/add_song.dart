@@ -17,7 +17,7 @@ class AddSongState extends State<AddSong> {
     Future addFirebaseData() async{
     await FirebaseFirestore.instance.collection("Song").add({//インスタンスを取得しコレクションを指定
       'name': 'Flutter',//追加するデータはmap型で指定
-      'ID': '1',
+      'ID': widget.id,
       'text': songWord,
       'createdAt': DateTime.now(),
     });
@@ -25,7 +25,6 @@ class AddSongState extends State<AddSong> {
 
     @override
   Widget build(BuildContext context) {
-    print('移行後のIDは${widget.id}');
     return Scaffold(
       appBar: AppBar(
         title: const Text('曲追加'),
