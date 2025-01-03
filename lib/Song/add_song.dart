@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AddSong extends StatefulWidget {
-  const AddSong({super.key});
+  const AddSong({super.key,required this.id});
 
+final String id;
   @override
   State<AddSong> createState() => AddSongState();
 }
 
 class AddSongState extends State<AddSong> {
-
+    
     String songWord = '';
     
     //firebaseにデータを追加するメソッド
@@ -24,6 +25,7 @@ class AddSongState extends State<AddSong> {
 
     @override
   Widget build(BuildContext context) {
+    print('移行後のIDは${widget.id}');
     return Scaffold(
       appBar: AppBar(
         title: const Text('曲追加'),

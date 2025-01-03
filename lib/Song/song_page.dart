@@ -65,9 +65,10 @@ class SongPageState extends State<SongPageful> {
         floatingActionButton: FloatingActionButton(
           
           onPressed: () {
+            debugPrint('現在のIDは${widget.id}');
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AddSong())
+              MaterialPageRoute(builder: (context) => AddSong(id: widget.id))
             );
           },
           backgroundColor: const Color.fromARGB(255, 255, 255, 240),
