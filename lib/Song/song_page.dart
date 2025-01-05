@@ -1,4 +1,5 @@
 import 'package:choose_songs/Song/add_song.dart';
+import 'package:choose_songs/Song/change_song.dart';
 import 'package:choose_songs/post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,13 @@ List <Post> posts = [];
         });  
     });
   }
+
+    //Firebaseからデータを削除するメソッド
+  Future deleteFirebaseData(String id) async{
+  await FirebaseFirestore.instance.collection("Song").doc(id).delete();//ドキュメントIDを指定して削除 。引数はいらない
+  }
+
+
   
   @override
   Widget build(BuildContext context) {
@@ -97,7 +105,44 @@ List <Post> posts = [];
 
                   const Spacer(),
                   IconButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      //ボトムシートを表示
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                        
+                          return Center(  
+                              child: ListView(
+                              children:[
+                                    ListTile(
+                                      leading: const Icon(Icons.edit),
+                                      title:const Text('名前変更'),
+                                      onTap: () async {
+                                        //Navigator.pop(context);
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => ChangeSongName(post),)
+                                        );
+                                        Navigator.pop(context);
+                                        await fetchFirebaseData();
+                                        
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: const Icon(Icons.delete), // 左側のアイコン
+                                      title:const Text('削除'),
+                                      onTap: () async {
+                                        deleteFirebaseData(post.id);
+                                        fetchFirebaseData();
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                              ]
+                            ) 
+                          );
+                        },
+                      );
+                    },
                     icon:const Icon(Icons.more_vert),
                   ),
 
